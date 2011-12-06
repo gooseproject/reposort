@@ -1,0 +1,27 @@
+This is information on the use and output of the option --build-order of the repoquery script.  
+
+1. call repoquery as a script
+2. use "--build-order" as an option
+3. specify a package for which you want the build order
+
+Returns:
+1. a list of all recursive dependencies listed in reverse topological order (most required packages first and the package in question last).
+2. if more than one package is specified as an argument each package list will be sorted the same way and then appended to the end of the list.
+
+TODO:
+1. I wanted a way to do this for a whole repository, but this is the one step closer.
+2. I also want that the lists combine, not append to the bottom.
+
+Example:
+My test was this:
+
+For source RPMs:
+./repoquery.py --repofrompath=fedora-test,http://mirror.chpc.utah.edu/pub/fedora/linux/release/15/Fedora/source/SRPMS/ --build-order bash
+
+For x86_64 RPMs:
+./repoquery.py --repofrompath=fedora-test,http://mirror.chpc.utah.edu/pub/fedora/linux/release/15/Fedora/x86_64/os --build-order bash
+
+You can narrow the resultant package list to include only the relevant RPMs by using the --arc=src or --arc=x86_64 respectively
+
+Feedback:
+Let me know how I can improve this functionality.  I am most readily available at dtaualii@gmail.com
